@@ -17,21 +17,21 @@ const SOURCES = [
 function fetchNews(source) {
   let url = `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${API_KEY}`;
 
-  https.get(url, function(res) {
-    let error = checkForErrors(res);
+  https.get(url, function(response) {
+    let error = checkForErrors(response);
     if (error) {
       console.error(error.message);
-      res.resume();
+      response.resume();
       return;
     }
 
-    res.setEncoding('utf8');
+    response.setEncoding('utf8');
     let rawData = '';
-    res.on('data', (chunk) => {
+    response.on('data', (chunk) => {
       rawData += chunk;
     });
     // Entire body has been received
-    res.on('end', () => {
+    response.on('end', () => {
       try {
         const json = parseJSON(rawData);
         const articles = getHeadlinesFrom(json);
