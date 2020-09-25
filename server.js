@@ -1,1 +1,0 @@
-const fetchNews = require('./fetchNews');
