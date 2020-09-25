@@ -1,0 +1,32 @@
+{
+  "name": "news-dump-server",
+  "version": "1.0.0",
+  "description": "A server for a news aggregator.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanweerden/news-dump-server.git"
+  },
+  "keywords": [
+    "news",
+    "news",
+    "api",
+    "news",
+    "aggregator",
+    "news",
+    "dashboard"
+  ],
+  "author": "Andrew Vanweerden",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vanweerden/news-dump-server/issues"
+  },
+  "homepage": "https://github.com/vanweerden/news-dump-server#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "https": "^1.0.0"
+  }
+}
