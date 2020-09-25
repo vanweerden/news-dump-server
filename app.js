@@ -1,14 +1,24 @@
-const http = require('http');
-const fetchNews = require('./fetch');
+const express = require('express');
+const path = require('path');
+const fetchNewsFrom = require('./fetch');
 const config = require('./config');
+
+const app = express();
 const { port, hostname } = config.app;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World!');
+app.get('/', (req, res) => {
+  try {
+    let json = fetchNewsFrom('abc');
+    // send json news
+  } catch(e) {
+    console.log(e);
+  }
 });
 
-server.listen(port, hostname, () => {
+app.post('/', (req, res) => {
+  // do something with request
+});
+
+app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
