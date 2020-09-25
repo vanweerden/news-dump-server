@@ -1,8 +1,6 @@
 'use strict'
 const https = require('https');
-
-// TODO Hide this
-const API_KEY = config.API_KEY;
+const { API_KEY } = require('./config');
 
 const SOURCES = [
   'abc-news-au',
@@ -20,7 +18,8 @@ function fetchNews(source) {
   let url = `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${API_KEY}`;
 
   https.get(url, function(res) {
-    if (checkForErrors(res)) {
+    let error = checkForErrors(res);
+    if (error) {
       console.error(error.message);
       res.resume();
       return;
@@ -70,5 +69,3 @@ function getHeadlinesFrom(json) {
     console.log(i + 1, articles[i].title);
   }
 }
-
-fetchNews('hacker-news');

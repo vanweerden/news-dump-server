@@ -1,3 +1,8 @@
-### JavaScript Headline Dashboard
+### News Dump
 
-A webpage where you can collect news sources that you want to follow in one place. You will be able to save your settings as a custom URL.
+This is the server for a news aggregator.
+
+- Server: Node/Express 
+- API: [NewsAPI.org](https://newsapi.org/)
+
+Project name pending.
