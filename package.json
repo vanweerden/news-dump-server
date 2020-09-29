@@ -27,6 +27,7 @@
   "homepage": "https://github.com/vanweerden/news-dump-server#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "https": "^1.0.0"
+    "https": "^1.0.0",
+    "node-fetch": "^2.6.1"
   }
 }

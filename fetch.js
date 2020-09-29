@@ -1,42 +1,22 @@
 'use strict'
-const https = require('https');
+const fetch = require('node-fetch');
 const { API_KEY } = require('./config');
 
 const fetchNews = (source) => {
   source = getFullNameOf(source);
   let url = `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${API_KEY}`;
 
-  https.get(url, function(response) {
-    let error = checkForErrors(response);
-    if (error) {
-      console.error(error.message);
-      response.resume();
-      return;
-    }
-
-    response.setEncoding('utf8');
-    let rawData = '';
-
-    // A chunk of data has been received
-    response.on('data', (chunk) => {
-      rawData += chunk;
-    });
-    // Entire response has been received
-    response.on('end', () => {
-      try {
-        const json = parseJSON(rawData);
-
-        // BUG: console.log prints object
-        // but returns 'undefined'
-        console.log(json);
-        return json;
-      } catch (error) {
-        console.error(error);
+  let settings = { method: "Get" };
+  fetch(url, settings)
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Network response not ok');
       }
+      return res.json();
+    })
+    .then((json) => {
+      console.log(json);
     });
-  }).on('error', (e) => {
-    console.error(`Got error: ${e.message}`);
-  });
 }
 
 function getFullNameOf(source) {
@@ -52,16 +32,6 @@ function getFullNameOf(source) {
     'wsj': 'the-wall-street-journal',
   };
   return SOURCES[source];
-}
-
-function checkForErrors(res) {
-  const { statusCode } = res;
-  let error;
-  if (statusCode !== 200) {
-    error = new Error ('Request failed.\n' +
-                       `Status Code: ${statusCode}`);
-  }
-  return error;
 }
 
 function parseJSON(data) {
